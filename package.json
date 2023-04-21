@@ -1,0 +1,28 @@
+{
+  "name": "@liamtownsley/easylog",
+  "version": "1.0.0",
+  "description": "A simple CLI logging management program.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiamTownsley2/EasyLog.git"
+  },
+  "keywords": [
+    "easylog",
+    "logging",
+    "logger",
+    "cli"
+  ],
+  "author": "Liam Townsley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiamTownsley2/EasyLog/issues"
+  },
+  "homepage": "https://github.com/LiamTownsley2/EasyLog#readme",
+  "dependencies": {
+    "node-console-colors": "^1.1.5"
+  }
+}
