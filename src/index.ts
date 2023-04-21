@@ -108,12 +108,4 @@ function log(message: string, type: LogType = LogType.LOG) {
     console.log(formatLog(message, type));
 }
 
-log("Checked Log", LogType.CHECKED_LOG);
-log("Critical Error", LogType.CRITICAL_ERROR);
-log("Debug", LogType.DEBUG);
-log("Log", LogType.LOG);
-log("Minor Error", LogType.MINOR_ERROR);
-log("Warning", LogType.WARNING);
-
-
 export { log };
