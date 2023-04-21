@@ -108,4 +108,4 @@ function log(message: string, type: LogType = LogType.LOG) {
     console.log(formatLog(message, type));
 }
 
-export { log };
+export {LogType, log};
