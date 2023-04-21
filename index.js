@@ -92,11 +92,4 @@ function debug(message) {
     ].join(' '));
 }
 
-debug("Debug Message");
-checkedLog("Checked Log");
-log("Unchecked Log");
-error("Minor Error");
-criticalError("Critical Error");
-warning("Warning");
-
 module.exports = {checkedLog, criticalError, debug, error, log, warning};
