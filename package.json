@@ -1,9 +1,15 @@
 {
   "name": "@liamtownsley/easylog",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "A simple CLI logging management program.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "hot": "tsc --build && cd dist && node --trace-warnings index",
+    "build": "tsc --build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +29,6 @@
   },
   "homepage": "https://github.com/LiamTownsley2/EasyLog#readme",
   "dependencies": {
-    "node-console-colors": "^1.1.5"
+    "typescript": "^5.0.4"
   }
 }
