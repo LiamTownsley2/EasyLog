@@ -1,6 +1,6 @@
 {
   "name": "@liamtownsley/easylog",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A simple CLI logging management program.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
