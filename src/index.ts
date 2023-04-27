@@ -1,22 +1,28 @@
 import { LogColour, LogType, _ColourCodes } from './StaticValues.js';
 
 function getColourCode(colourCode: LogColour) {
-    return _ColourCodes[colourCode];
+    let _code = colourCode.split('/');
+
+    if(_code.length == 1) return _ColourCodes[_code[0]];
+    if(_code.length == 2) return _ColourCodes[_code[0]][_code[1]];
 }
 
 function wrapStyle(message: string, style: LogColour | Array<LogColour>) {
-    if (typeof style == 'number') {
-        const [_start, _end] = getColourCode(style);
-        return _start + message + _end;
+    const isArray = Array.isArray(style);
+    
+    if(isArray) {
+        let _message = null;
+        for (const _style of style) {
+            const _ColourCode = getColourCode(_style);
+            const _ResetCode = getColourCode(LogColour.Reset);
+            _message = `${_ColourCode}${message}${_ResetCode}`;
+        }
+        return _message;
     }
 
-    let formatted_message = message;
-    for (const _style of style) {
-        const [_start, _end] = getColourCode(_style);
-        formatted_message = _start + message + _end;
-    }
-
-    return formatted_message;
+    const _ColourCode = getColourCode(style);
+    const _ResetCode = getColourCode(LogColour.Reset);
+    return `${_ColourCode}${message}${_ResetCode}`
 }
 
 
@@ -44,20 +50,19 @@ function formatTimestamp(type: LogType) {
     let formatting = [];
     switch (type) {
         case LogType.CRITICAL_ERROR:
-            formatting.push(LogColour.Red);
-            formatting.push(LogColour.Bold, LogColour.Inverse)
+            formatting.push(LogColour.BgRed);
             break;
         case LogType.MINOR_ERROR:
-            formatting.push(LogColour.Red);
+            formatting.push(LogColour.FgRed);
             break;
         case LogType.WARNING:
-            formatting.push(LogColour.Yellow);
+            formatting.push(LogColour.FgYellow);
             break;
         case LogType.DEBUG:
-            formatting.push(LogColour.Grey);
+            formatting.push(LogColour.FgGray);
             break;
         default:
-            formatting.push(LogColour.Cyan);
+            formatting.push(LogColour.FgCyan);
             break;
     }
     return wrapStyle(time, formatting);
@@ -78,23 +83,28 @@ function getIcon(type:LogType) {
     return icon;
 }
 
-function formatLog(message:string, type:LogType) {
+function formatLog(message:string|Error, type:LogType) {
     const timestamp = formatTimestamp(type);
     let icon = getIcon(type);
     if(!icon) icon = '  ';
     let _message = message;
+    if(typeof message == 'string') {
+        _message = message;
+    } else {
+        _message = `${message.name} -- ${message.message}\n${message.stack}`;
+    }
     switch (type) {
         case LogType.CRITICAL_ERROR:
-            _message = wrapStyle(_message, [LogColour.Red, LogColour.Inverse]);
+            _message = wrapStyle(_message, [LogColour.BgRed]);
             break;
         case LogType.MINOR_ERROR:
-            _message = wrapStyle(_message, LogColour.Red);
+            _message = wrapStyle(_message, LogColour.FgRed);
         case LogType.WARNING:
-            _message = wrapStyle(_message, LogColour.Yellow);
+            _message = wrapStyle(_message, LogColour.FgYellow);
         case LogType.DEBUG:
-            _message = wrapStyle(_message, LogColour.Gray);
+            _message = wrapStyle(_message, LogColour.FgGray);
         default:
-            _message = wrapStyle(_message, LogColour.Cyan);
+            _message = wrapStyle(_message, LogColour.FgCyan);
             break;
     }
     if(type == LogType.DEBUG) {
