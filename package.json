@@ -1,6 +1,6 @@
 {
   "name": "@liamtownsley/easylog",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A simple CLI logging management program.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/LiamTownsley2/EasyLog#readme",
   "dependencies": {
+    "@liamtownsley/easylog": "^2.0.4",
     "typescript": "^5.0.4"
   }
 }

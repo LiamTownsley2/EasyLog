@@ -114,7 +114,7 @@ function formatLog(message:string|Error, type:LogType) {
 
 }
 
-function log(message: string, type: LogType = LogType.LOG) {
+function log(message: string | Error, type: LogType = LogType.LOG) {
     console.log(formatLog(message, type));
 }
 
